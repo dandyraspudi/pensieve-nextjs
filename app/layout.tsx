@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-// @ts-expect-error CSS import
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Play } from "next/font/google";
