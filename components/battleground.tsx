@@ -1,11 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  usePokemonStore,
-  usePlayerStore,
-  useBattleStore,
-} from "@/app/store/pokemon.store";
+import { usePokemonStore, usePlayerStore, useBattleStore } from "@/app/store/pokemon.store";
 import { PokemonImage } from "./pokemon-image";
 import { PokemonStatus } from "./pokemon-status";
 import { BattleControls } from "./battle-control";
@@ -14,12 +10,9 @@ export default function Battleground() {
   const { players } = usePlayerStore();
   const { player1, player2, winner } = useBattleStore();
   const imgUrl = usePokemonStore((state) => state.selected[0]);
-  const imgMiddleSrc =
-    players["player1"] || players["player2"]
-      ? "/assets/versus.webp"
-      : "/assets/pokemon-logo.webp";
+  const imgMiddleSrc = players["player1"] || players["player2"] ? "/assets/versus.webp" : "/assets/pokemon-logo.webp";
 
-  const glowColor: Record<string, string> = {
+  const glowColor = {
     fire: "rgba(255,120,0,0.8)",
     water: "rgba(0,180,255,0.8)",
     grass: "rgba(0,255,120,0.8)",
@@ -45,11 +38,9 @@ export default function Battleground() {
             {players["player1"] && (
               <div className="flex flex-col items-center justify-center">
                 <div
-                  className="relative animate-lightning animate-pop animate-alive-left"
+                  className={`relative animate-lightning animate-pop animate-alive-left ${winner === "player1" ? "animate-winner" : ""}`}
                   style={{
-                    filter: `drop-shadow(0 0 40px ${
-                      glowColor[player1.types?.[0]?.type?.name ?? "fire"]
-                    })`,
+                    filter: `drop-shadow(0 0 40px ${glowColor[(players["player1"].types[0]?.type?.name as keyof typeof glowColor) || "fire"]})`,
                   }}
                 >
                   <div className="absolute inset-0 opacity-0 animate-lightning pointer-events-none" />
@@ -83,11 +74,9 @@ export default function Battleground() {
             {players["player2"] && (
               <div className="flex flex-col items-center justify-center">
                 <div
-                  className="relative animate-lightning animate-pop animate-alive-right"
+                  className={`relative animate-lightning animate-pop animate-alive-right ${winner === "player2" ? "animate-winner" : ""}`}
                   style={{
-                    filter: `drop-shadow(0 0 40px ${
-                      glowColor[player2.types?.[0]?.type?.name ?? "fire"]
-                    })`,
+                    filter: `drop-shadow(0 0 40px ${glowColor[(players["player2"].types[0]?.type?.name as keyof typeof glowColor) || "fire"]})`,
                   }}
                 >
                   <div className="absolute inset-0 opacity-0 animate-lightning pointer-events-none" />
