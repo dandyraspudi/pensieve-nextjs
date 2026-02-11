@@ -10,9 +10,15 @@ export function useSound(src: string, volume = 0.5) {
     audioRef.current.volume = volume;
   }
 
+  // const play = () => {
+  //   audioRef.current!.currentTime = 0;
+  //   audioRef.current!.play();
+  // };
   const play = () => {
-    audioRef.current!.currentTime = 0;
-    audioRef.current!.play();
+    if (typeof window === "undefined") return;
+    const audio = new Audio(src);
+    audio.volume = volume;
+    audio.play().catch(() => {});
   };
 
   return play;
