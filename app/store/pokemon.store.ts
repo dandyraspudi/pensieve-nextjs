@@ -9,6 +9,13 @@ type Pokemon = {
   speed: number;
 };
 
+type PokemonPlayer = {
+  name: string;
+  stats: any;
+  sprites: any;
+  types: any;
+};
+
 type PokemonStore = {
   selected: string[];
   add: (name: string) => void;
@@ -18,8 +25,8 @@ type PokemonStore = {
 type Store = {
   activePlayer: "player1" | "player2";
   players: {
-    player1?: string;
-    player2?: string;
+    player1?: PokemonPlayer | null;
+    player2?: PokemonPlayer | null;
   };
   setPlayer: (p: "player1" | "player2") => void;
   selectPokemon: (name: string) => void;

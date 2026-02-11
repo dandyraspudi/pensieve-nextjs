@@ -58,7 +58,7 @@ export function PokemonGrid({ pokemonListData }: PokemonGridProps) {
     }
 
     if (selectedType !== "all") {
-      list = list.filter((p) => p.types.some((t) => t === selectedType));
+      list = list.filter((p) => p.types.some((t: any) => t === selectedType));
     }
 
     if (sort === "asc") {

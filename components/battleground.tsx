@@ -25,6 +25,8 @@ export default function Battleground() {
     grass: "rgba(0,255,120,0.8)",
   };
 
+  console.log(players["player1"], " <<players")
+
   if (!imgUrl) return null;
 
   return (
